@@ -2,6 +2,11 @@
 
 Databases are not tracked in Git. The approved candidate uses:
 
+The standalone Knowledge DB is supplied as `knowledge.db.zip` to reduce transfer
+size. Extract its single `knowledge.db` entry without changing the database. Verify
+the extracted file against the table below. `SHA256SUMS-ARCHIVE.txt` also identifies
+the archive itself. The installer already includes the original uncompressed DB.
+
 | File | Bytes | Records | SHA-256 |
 |---|---:|---|---|
 | `knowledge.db` | 216580096 | 5579 entities | `785B72ECAFC9E2103213AD1E66F7D2B928B332CEC53C2EAB006F7BF20139B899` |
