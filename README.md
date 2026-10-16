@@ -1,108 +1,100 @@
- # Skyrim RP Encyclopedia
- 
--A Windows desktop encyclopedia and role-playing toolkit for Skyrim communities.
-+## [⬇️ СКАЧАТЬ ДЛЯ WINDOWS](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia/releases/latest)
-+
-+Готовый установщик Windows: для обычной установки не нужно запускать команды
-+или собирать исходный код.
-+
-+> **Стабильный релиз пока не опубликован.** Репозиторий приватный, установщик
-+> находится в Draft. Ссылка выше предназначена для будущего опубликованного
-+> стабильного релиза и не открывает установщик из текущего черновика.
-+
-+После публикации стабильного релиза:
-+
-+1. Нажмите **«Скачать для Windows»** выше.
-+2. На странице релиза выберите `SkyrimRP-Setup-1.0.0.exe` в разделе **Assets**.
-+3. Дождитесь загрузки и откройте скачанный файл двойным щелчком.
-+4. Следуйте инструкциям установщика.
-+
-+Windows SmartScreen или антивирус могут показать предупреждение. Перед запуском
-+проверьте источник файла и опубликованную контрольную сумму; не отключайте защиту.
-+
-+### О программе
-+
-+Энциклопедия и инструменты для Skyrim RP под Windows: поиск по базе знаний,
-+отдельные RP-правила, личные статьи, генераторы сценариев и простых ивентов,
-+атлас связей, карты NordCore / SkyRP Map, оверлей и мини-карта.
-+Подробные возможности, требования и документация приведены ниже.
-+
- Built with C#/.NET 10, WPF, SQLite and Microsoft Edge WebView2.
-
-
-
 # Skyrim RP Encyclopedia
 
-A Windows desktop encyclopedia and role-playing toolkit for Skyrim communities.
-Built with C#/.NET 10, WPF, SQLite and Microsoft Edge WebView2.
+## [⬇ Скачать Skyrim RP Encyclopedia для Windows — установщик](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia/releases)
 
-> **Private 1.0.0 release candidate — not cleared for public redistribution.**
-> Wiki content, visual assets and community rules have separate provenance and
-> licensing requirements. See [third-party notices](THIRD_PARTY_NOTICES.md).
-> No open-source license for the original application code has been selected.
+> Стабильный релиз пока не опубликован: репозиторий приватный, текущая сборка
+> находится в черновике (Draft). Скачивание для всех станет доступно только после
+> отдельного решения о публикации репозитория и релиза.
 
-## Features
+Skyrim RP Encyclopedia — энциклопедия и набор инструментов для ведущих и участников
+Skyrim RP. Программа помогает читать статьи, готовить отыгрыш и пользоваться картой
+рядом с игрой. Для обычной установки не нужны командная строка, Git или сборка кода.
 
-- Search and read a local Skyrim Knowledge DB; browse categories and relationships
-  in the Knowledge Atlas.
-- Read a separate **RP Rules** collection, clearly marked as community rules,
-  **not Skyrim Wiki canon**.
-- Create personal articles, notes and metadata without changing bundled corpora.
-- Generate structured RP scenarios and simple events offline, with reproducible
-  seeds, validation and separate public/GM text where supported.
-- Use an overlay and mini-map alongside the main window.
-- Switch between [NordCore](https://map.nordcore.dev/) and
-  [SkyRP Map](https://skyrpmap.com/). The selected map is persisted locally.
-- An optional assistant integrates with local Ollama; neither Ollama nor a model
-  is bundled. The application does not require it for offline generators.
+## Что умеет программа
 
-No screenshots are included: current private QA captures have not been approved
-for distribution.
+- Искать статьи в локальной базе знаний, показывать категории и атлас связей.
+- Открывать отдельный раздел «Правила RP»: это правила сообщества, а не канон Wiki.
+- Хранить личные статьи, заметки, теги и флаги.
+- Генерировать RP-сценарии и простые ивенты без языковой модели и сетевых запросов;
+  повторять результат по seed.
+- Показывать карты [NordCore](https://map.nordcore.dev/) и
+  [SkyRP Map](https://skyrpmap.com/), игровой оверлей и мини-карту.
 
-## Requirements
+ИИ-помощник с локальной Ollama — необязательная функция. Ollama и модель не входят
+в установщик и не нужны для чтения статей и работы офлайн-генераторов.
 
-- Windows x64. The project targets Windows 10 build 17763; this target is not a
-  guarantee of support or successful testing on every Windows edition.
-- Microsoft Edge WebView2 Evergreen Runtime, installed separately. The installer
-  checks for it and does not silently download it.
-- The candidate installer includes .NET 10 Desktop Runtime (self-contained x64).
-- Internet access is needed for online maps, OAuth and external source links,
-  not for reading bundled articles or using offline generators.
+## Установка — 3 шага
 
-## Install and update
+После публикации релиза:
 
-1. Obtain the approved installer and checksum from the private release candidate.
-2. Verify SHA-256 before running it. Do not copy only the program EXE.
-3. Run the installer and choose a destination directory.
-4. Launch **Skyrim RP Encyclopedia**. Bundled data is discovered automatically:
-   `Data/knowledge.db` and `Data/rp_rules.db` under the installed application.
+1. Откройте [страницу скачивания](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia/releases).
+   В релизе **v1.0.0** разверните **Assets** и нажмите **`SkyrimRP-Setup-1.0.0.exe`**.
+   Не выбирайте `Source code (zip)` или `Source code (tar.gz)`: это исходники,
+   а не установщик. Базы отдельно скачивать не требуется.
+2. Дождитесь загрузки и откройте `SkyrimRP-Setup-1.0.0.exe` двойным щелчком.
+   Выберите папку установки и следуйте подсказкам.
+3. Запустите **Skyrim RP Encyclopedia** через созданный ярлык в меню «Пуск».
+   Ярлык на рабочем столе можно выбрать при установке.
 
-The candidate contains **5,579 Knowledge entities** and **33 RP articles**. The
-databases remain separate and are read-only. The RP package preserves one
-internal article link; an external link to a developer's official DB was excluded.
+Windows SmartScreen или антивирус могут показать предупреждение. Перед запуском
+проверьте источник файла и контрольную сумму; не отключайте защиту ради установки.
 
-Updating replaces application files and bundled data, not the personal database.
-Back up your data first. Installation/update has been tested in an isolated folder
-on the development PC, **not on a clean Windows VM**. Detailed map/OAuth acceptance
-and restart persistence must be recorded separately; successful builds do not
-prove these scenarios.
+### Что требуется
 
-## Personal data and backup
+- 64-разрядная Windows. Проект ориентирован на Windows 10 build 17763 и новее,
+  но совместимость с каждой редакцией и чистой Windows пока не подтверждена.
+- Microsoft Edge WebView2 Evergreen Runtime. Если установщик сообщает о его
+  отсутствии, установите Runtime с [официальной страницы Microsoft](https://developer.microsoft.com/en-us/microsoft-edge/webview2/).
+  Установщик приложения не скачивает его автоматически.
+- Интернет — для онлайн-карт, авторизации на сайтах и внешних ссылок.
+  Чтение встроенных статей и офлайн-генераторы работают без сети.
 
-Personal databases, settings and the shared WebView2 profile are stored beneath
-`%LOCALAPPDATA%\SkyrimRpEncyclopedia`, outside the installation directory.
-Close the application normally before making a private backup. Keep the backup
-outside this repository. A full profile backup can contain authenticated web
-sessions: do not upload or share it.
+.NET 10 Desktop Runtime уже включён в текущий установщик x64; отдельно устанавливать
+SDK или собирать проект для обычного использования не нужно.
 
-The installer does not bundle a personal `user.db` or `official.db`, and uninstall
-does not intentionally clear the LocalAppData browser profile. External browser
-sign-in is not automatically transferred to WebView2.
+## Данные, обновление и резервная копия
 
-## Build and test
+В кандидат входят база знаний с **5 579 сущностями** и отдельный пакет из
+**33 RP-статей**. Приложение находит их автоматически после установки и читает
+только для чтения. Одна внутренняя связь между RP-статьями сохранена; внешняя связь
+с локальной официальной базой разработчика исключена.
+[Состав и контрольные суммы баз](Data/README.md).
 
-Install the .NET 10 SDK on Windows, restore dependencies from their official
-sources, then run from the repository root:
+Перед обновлением штатно закройте приложение и сделайте личную резервную копию
+папки `%LOCALAPPDATA%\SkyrimRpEncyclopedia`. Установщик не включает вашу личную
+базу и не должен заменять её при обновлении. Установка и обновление проверялись
+в отдельной папке на компьютере разработки, не на чистой Windows/VM.
+
+Профиль WebView2 и настройки находятся вне папки программы и намеренно не удаляются
+при деинсталляции. Резервная копия профиля может содержать авторизованные сессии:
+не прикладывайте её к обращениям и не публикуйте. Вход во внешнем браузере
+не переносится в приложение автоматически.
+
+## Помощь и сообщения об ошибках
+
+Посмотрите [существующие обращения в Issues](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia/issues).
+Если похожего случая нет, [создайте сообщение об ошибке](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia/issues/new):
+укажите версию программы и Windows, шаги воспроизведения, ожидаемый результат
+и точный текст ошибки. Можно приложить скриншот без личных данных.
+
+Не отправляйте личные базы, cookies, пароли, токены или полный профиль WebView2.
+Для обращения нужен аккаунт GitHub; пока репозиторий приватный, также нужен доступ
+к нему.
+
+## Исходный код и документация
+
+- [Исходный код проекта](https://github.com/Alise-Hatori/SkyrimRpEncyclopedia).
+- [Сборка, изолированный запуск и упаковка](docs/BUILD_AND_PACKAGE.md).
+- [Подготовка установщика](Installer/README.md).
+- [Описание кандидата 1.0.0 и ограничения](docs/RELEASE_NOTES_1.0.0.md).
+- [Сторонние компоненты и происхождение контента](THIRD_PARTY_NOTICES.md).
+
+## Для разработчиков
+
+Проект использует C#/.NET 10, WPF, SQLite и Microsoft Edge WebView2.
+Ниже — команды для разработки, не для обычной установки.
+
+После установки .NET 10 SDK на Windows выполните из корня проекта:
 
 ```powershell
 dotnet restore .\SkyrimRpEncyclopedia.csproj
@@ -111,7 +103,8 @@ dotnet build .\SkyrimRpEncyclopedia.csproj -c Release -r win-x64 --no-restore
 dotnet build .\Tests\SkyrimRpEncyclopedia.MvpSmokeTests.csproj -c Release --no-restore
 ```
 
-Smoke tests require an existing fixture and an independently known entity count:
+Для smoke-тестов нужен существующий файл фикстуры и независимо известное количество
+сущностей. Пример для полной Knowledge DB:
 
 ```powershell
 $env:SKYRIM_RP_MVP_DB = (Resolve-Path .\Data\knowledge.db).Path
@@ -119,20 +112,22 @@ $env:SKYRIM_RP_TEST_MVP_EXPECTED_ENTITY_COUNT = '5579'
 dotnet run --project .\Tests\SkyrimRpEncyclopedia.MvpSmokeTests.csproj -c Release --no-build
 ```
 
-For the legacy fixture, select its actual file and set the expected count to `125`.
-The legacy fixture is not bundled. Never infer the expected count from the tested
-database. Tests use temporary writable databases; source fixtures stay read-only.
+Для legacy MVP выберите её реальный файл и задайте `125`; эта фикстура не входит
+в установщик. Не вычисляйте ожидаемое количество из проверяемой базы.
+Тесты используют временные базы для записи, исходные фикстуры остаются read-only.
+Базы и установщик хранятся отдельно от Git-истории.
 
-See [build and packaging instructions](docs/BUILD_AND_PACKAGE.md) for isolated
-launches and installer preparation. Large databases and the installer are not
-tracked in Git; see [data checksums](Data/README.md).
+## Статус релиза и права
 
-## Release status and licensing
+Это независимый фанатский проект без заявления об официальном одобрении Bethesda,
+ZeniMax, Microsoft, Fandom, Discord или поставщиками карт.
 
-This is an independent fan project. It is not an official Bethesda, ZeniMax,
-Microsoft, Fandom, Discord, NordCore or SkyRP product and does not claim endorsement.
+Лицензия собственного кода пока не согласована. Корпус Wiki, RP-правила и графические
+ресурсы имеют отдельное происхождение; наличие исходной ссылки не подтверждает
+право на распространение. Незакрытые вопросы перечислены в
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Application code, dependencies, Wiki text, graphics and community RP rules are
-distinct materials. Private access does not settle rights for public redistribution.
-Do not make the repository or its candidate assets public until the listed rights,
-attribution and acceptance blockers are resolved.
+Публичная готовность не подтверждена: остаются вопросы прав и атрибуции, комплект
+уведомлений зависимостей, чистая Windows/VM и отдельное подтверждение сохранения
+карты после полного перезапуска. Ранее отмеченные тайм-ауты карт и OAuth HTTP 401
+не объявляются исправленными документацией.
