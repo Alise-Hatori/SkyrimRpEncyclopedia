@@ -1,0 +1,91 @@
+<Window x:Class="SkyrimRpEncyclopedia.OverlayAppearanceSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Оформление оверлея" Width="390" Height="550"
+        MinWidth="360" MinHeight="515" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+    <Window.Resources>
+        <SolidColorBrush x:Key="SettingsBackgroundBrush" Color="#E61B1E20"/>
+        <SolidColorBrush x:Key="SettingsBorderBrush" Color="#7F9098"/>
+        <SolidColorBrush x:Key="SettingsPrimaryTextBrush" Color="#E7EAEB"/>
+        <SolidColorBrush x:Key="SettingsSecondaryTextBrush" Color="#AFBBC0"/>
+        <SolidColorBrush x:Key="SettingsAccentBrush" Color="#93AAB4"/>
+        <SolidColorBrush x:Key="SettingsHoverBrush" Color="#2B293236"/>
+        <Style x:Key="SettingsButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="{DynamicResource SettingsPrimaryTextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="2">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Root" Property="Background" Value="{DynamicResource SettingsHoverBrush}"/></Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource SettingsAccentBrush}"/><Setter TargetName="Root" Property="BorderThickness" Value="1"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border Margin="1" Padding="18" Background="{DynamicResource SettingsBackgroundBrush}" BorderBrush="{DynamicResource SettingsBorderBrush}" BorderThickness="1" CornerRadius="4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,18">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="4"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SettingsAccentBrush}" Margin="0,1,11,1" CornerRadius="1"/>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="ОФОРМЛЕНИЕ АРХИВА" Foreground="{DynamicResource SettingsPrimaryTextBrush}" FontWeight="SemiBold" FontSize="15" FontStretch="SemiCondensed"/>
+                    <TextBlock Text="Изменения применяются сразу" Foreground="{DynamicResource SettingsSecondaryTextBrush}" FontSize="11" Margin="0,3,0,0"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0,0,0,14">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="138"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Text="Тема" Foreground="{DynamicResource SettingsSecondaryTextBrush}" VerticalAlignment="Center"/>
+                <ComboBox x:Name="ThemeComboBox" Grid.Column="1" SelectionChanged="ThemeComboBox_SelectionChanged" Padding="6,3" Background="{DynamicResource SettingsHoverBrush}" Foreground="{DynamicResource SettingsPrimaryTextBrush}" BorderBrush="{DynamicResource SettingsBorderBrush}"/>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,0,0,14">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="138"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <TextBlock Text="Компоновка" Foreground="{DynamicResource SettingsSecondaryTextBrush}" VerticalAlignment="Center"/>
+                <ComboBox x:Name="LayoutModeComboBox" Grid.Column="1" SelectionChanged="LayoutModeComboBox_SelectionChanged" Padding="6,3" Background="{DynamicResource SettingsHoverBrush}" Foreground="{DynamicResource SettingsPrimaryTextBrush}" BorderBrush="{DynamicResource SettingsBorderBrush}"/>
+            </Grid>
+            <Grid Grid.Row="3" Margin="0,0,0,14">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="138"/><ColumnDefinition Width="*"/><ColumnDefinition Width="48"/></Grid.ColumnDefinitions>
+                <TextBlock Text="Прозрачность" Foreground="{DynamicResource SettingsSecondaryTextBrush}" VerticalAlignment="Center"/>
+                <Slider x:Name="OpacitySlider" Grid.Column="1" Minimum="0.35" Maximum="1" ValueChanged="OpacitySlider_ValueChanged"/>
+                <TextBlock x:Name="OpacityValueText" Grid.Column="2" Foreground="{DynamicResource SettingsAccentBrush}" VerticalAlignment="Center" TextAlignment="Right"/>
+            </Grid>
+            <Grid Grid.Row="4" Margin="0,0,0,14">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="138"/><ColumnDefinition Width="*"/><ColumnDefinition Width="48"/></Grid.ColumnDefinitions>
+                <TextBlock Text="Размер текста" Foreground="{DynamicResource SettingsSecondaryTextBrush}" VerticalAlignment="Center"/>
+                <Slider x:Name="FontSizeSlider" Grid.Column="1" Minimum="11" Maximum="22" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="FontSizeSlider_ValueChanged"/>
+                <TextBlock x:Name="FontSizeValueText" Grid.Column="2" Foreground="{DynamicResource SettingsAccentBrush}" VerticalAlignment="Center" TextAlignment="Right"/>
+            </Grid>
+            <StackPanel Grid.Row="5" Margin="0,0,0,12">
+                <CheckBox x:Name="DecorativeBorderCheckBox" Content="Тонкая рамка по краю архива" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,0,0,10" Checked="DecorativeBorderCheckBox_Changed" Unchecked="DecorativeBorderCheckBox_Changed"/>
+                <TextBlock Text="ВИДИМЫЕ БЛОКИ" Foreground="{DynamicResource SettingsAccentBrush}" FontSize="11" FontWeight="SemiBold" FontStretch="SemiCondensed" Margin="0,0,0,6"/>
+                <CheckBox x:Name="ArticleTitleCheckBox" Content="Заголовок статьи" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,2" Checked="BlockVisibilityCheckBox_Changed" Unchecked="BlockVisibilityCheckBox_Changed"/>
+                <CheckBox x:Name="ArticleCategoryCheckBox" Content="Категория статьи" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,2" Checked="BlockVisibilityCheckBox_Changed" Unchecked="BlockVisibilityCheckBox_Changed"/>
+                <CheckBox x:Name="ArticleContentCheckBox" Content="Основной текст статьи" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,2" Checked="BlockVisibilityCheckBox_Changed" Unchecked="BlockVisibilityCheckBox_Changed"/>
+                <CheckBox x:Name="RelatedArticlesCheckBox" Content="Связанные статьи" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,2" Checked="BlockVisibilityCheckBox_Changed" Unchecked="BlockVisibilityCheckBox_Changed"/>
+                <CheckBox x:Name="EmbeddedMapCheckBox" Content="Встроенная карта" Foreground="{DynamicResource SettingsSecondaryTextBrush}" Margin="0,2" Checked="BlockVisibilityCheckBox_Changed" Unchecked="BlockVisibilityCheckBox_Changed"/>
+            </StackPanel>
+            <DockPanel Grid.Row="6" LastChildFill="False">
+                <Button Style="{StaticResource SettingsButtonStyle}" Content="Сбросить" Click="Reset_Click"/>
+                <Button DockPanel.Dock="Right" Style="{StaticResource SettingsButtonStyle}" Content="Готово" IsDefault="True" Click="Close_Click"/>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>

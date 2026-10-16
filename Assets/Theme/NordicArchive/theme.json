@@ -1,0 +1,13 @@
+{
+  "id": "nordic-archive",
+  "name": "Нордский архив",
+  "description": "Камень, бронза, пергамент и иллюстрации северного архива.",
+  "version": 1,
+  "preview": "Images/hero-mountains.png",
+  "resources": [
+    "../DarkSkyrim/Colors.xaml",
+    "../DarkSkyrim/Icons.xaml",
+    "../DarkSkyrim/Controls.xaml",
+    "Visuals.xaml"
+  ]
+}

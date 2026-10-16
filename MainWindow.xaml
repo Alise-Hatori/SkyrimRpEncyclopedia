@@ -1,0 +1,398 @@
+﻿<Window x:Class="SkyrimRpEncyclopedia.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:SkyrimRpEncyclopedia.Views"
+        Title="Skyrim RP Encyclopedia"
+        Width="1400"
+        Height="850"
+        MinWidth="1100"
+        MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/Branding/SkyrimRpEncyclopedia.ico"
+        Background="{StaticResource NordVoidBrush}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- Main window uses the ordinary archive controls; overlay deliberately does not inherit this dictionary. -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/ThemeDefaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        <!-- A shared ornate metal treatment for every icon in the main navigation and toolbar. -->
+        <Style TargetType="Image">
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Effect"><Setter.Value><DropShadowEffect Color="#C99A55" BlurRadius="5" ShadowDepth="1" Opacity="0.6"/></Setter.Value></Setter>
+        </Style>
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="#101922"/><Setter Property="Foreground" Value="{StaticResource NordSilverBrush}"/>
+            <Setter Property="BorderBrush" Value="#B58A58"/><Setter Property="BorderThickness" Value="1"/><Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="#101922"/><Setter Property="Foreground" Value="{StaticResource NordSilverBrush}"/>
+            <Setter Property="Padding" Value="13,8,28,8"/><Setter Property="MinWidth" Value="190"/>
+            <Style.Triggers><Trigger Property="IsHighlighted" Value="True"><Setter Property="Background" Value="#3D2A1A"/><Setter Property="Foreground" Value="#F4DEC0"/></Trigger></Style.Triggers>
+        </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="ArchiveLoadingOverlay"
+                                     Storyboard.TargetProperty="Opacity"
+                                     BeginTime="0:0:0.28"
+                                     To="0"
+                                     Duration="0:0:0.48"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="250"/>
+
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+
+        <!-- ЛЕВАЯ ПАНЕЛЬ -->
+
+        <Border Grid.Column="0"
+                Background="{StaticResource NordStoneBrush}"
+                BorderBrush="{StaticResource NordMutedSilverBrush}"
+                BorderThickness="0,0,1,0">
+
+            <DockPanel>
+
+                <StackPanel DockPanel.Dock="Top"
+                            Margin="20,25,20,20">
+
+                    <Image Style="{x:Null}" Source="/Assets/Theme/NordicArchive/Images/archive-crest.png" Width="68" Height="68" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+
+                    <TextBlock Text="SKYRIM"
+                               Foreground="{StaticResource NordBlueGlowBrush}"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="RP ENCYCLOPEDIA"
+                               Foreground="{StaticResource NordMutedSilverBrush}"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center"
+                               Margin="0,2,0,0"/>
+
+                    <Separator Margin="0,18,0,5"
+                               Background="#38383F"/>
+
+                </StackPanel>
+
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel x:Name="SidebarNavigation">
+
+                        <TextBlock Text="ЭНЦИКЛОПЕДИЯ"
+                                   Foreground="{StaticResource NordMutedSilverBrush}"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   Margin="18,5,0,6"/>
+
+                        <Button Style="{StaticResource NordSelectedNavButton}" Click="Home_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconHome}" Width="20" Height="20"/><TextBlock Text="Главная" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="AllArticles_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconAllArticles}" Width="20" Height="20"/><TextBlock Text="Все статьи" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Фракции" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconFactions}" Width="20" Height="20"/><TextBlock Text="Фракции" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Локации" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconLocations}" Width="20" Height="20"/><TextBlock Text="Локации" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Персонажи" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconCharacters}" Width="20" Height="20"/><TextBlock Text="Персонажи" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Правила RP" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconRules}" Width="20" Height="20"/><TextBlock Text="Правила RP" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Лор Skyrim" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconLore}" Width="20" Height="20"/><TextBlock Text="Лор Skyrim" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Tag="Боги и даэдра" Style="{StaticResource NordNavButton}" Click="Category_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconGods}" Width="20" Height="20"/><TextBlock Text="Боги и даэдра" Margin="10,0,0,0"/></StackPanel></Button>
+
+
+                        <Separator Margin="15,12"
+                                   Background="#303038"/>
+
+
+                        <TextBlock Text="ИНСТРУМЕНТЫ"
+                                   Foreground="{StaticResource NordMutedSilverBrush}"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   Margin="18,5,0,6"/>
+
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Events_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconEvents}" Width="20" Height="20"/><TextBlock Text="Конструктор ивентов" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Generator_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconGenerator}" Width="20" Height="20"/><TextBlock Text="Генератор" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="SimpleEventGenerator_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconEvents}" Width="20" Height="20"/><TextBlock Text="Генератор простых ивентов" Margin="10,0,0,0" MaxWidth="150" TextWrapping="Wrap" VerticalAlignment="Center"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Graph_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconGraph}" Width="20" Height="20"/><TextBlock Text="Граф связей" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}"
+                                ToolTip="Ctrl+Shift+F10"
+                                Click="Overlay_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconOverlay}" Width="20" Height="20"/><TextBlock Text="Оверлей" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Map_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconMap}" Width="20" Height="20"/><TextBlock Text="Карта" Margin="10,0,0,0"/></StackPanel></Button>
+
+
+                        <Separator Margin="15,12"
+                                   Background="#303038"/>
+
+
+                        <TextBlock Text="МОИ МАТЕРИАЛЫ"
+                                   Foreground="#777780"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   Margin="18,5,0,6"/>
+
+
+                        <Button Style="{StaticResource NordNavButton}" Click="MyArticles_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconMyArticles}" Width="20" Height="20"/><TextBlock Text="Мои статьи" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="RecentArticles_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconRecent}" Width="20" Height="20"/><TextBlock Text="Недавно открытые" Margin="10,0,0,0"/></StackPanel></Button>
+                        <Button
+                                Click="EventsLibrary_Click"
+                                Style="{StaticResource NordNavButton}"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconEvents}" Width="20" Height="20"/><TextBlock Text="Мои ивенты" Margin="10,0,0,0"/></StackPanel></Button>
+
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Favorites_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconFavorite}" Width="20" Height="20"/><TextBlock Text="Избранное" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Notes_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconNotes}" Width="20" Height="20"/><TextBlock Text="Мои заметки" Margin="10,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordNavButton}" Click="Metadata_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconSettings}" Width="20" Height="20"/><TextBlock Text="Управление данными" Margin="10,0,0,0"/></StackPanel></Button>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+            </DockPanel>
+
+        </Border>
+
+
+        <!-- ОСНОВНАЯ ОБЛАСТЬ -->
+
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="80"/>
+
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+
+            <Border Grid.Row="0"
+                    Background="{StaticResource NordStoneBrush}"
+                    BorderBrush="{StaticResource NordMutedSilverBrush}"
+                    BorderThickness="0,0,0,1">
+
+                <Grid Margin="25,0">
+
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="*"/>
+
+                        <ColumnDefinition Width="Auto"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <Grid Grid.Column="0"
+                          Width="600"
+                          HorizontalAlignment="Left">
+
+                        <TextBox x:Name="SearchBox"
+                                 VerticalAlignment="Center"
+                                 Height="44"
+                                 Style="{StaticResource NordSearchBox}"
+                                 TextChanged="SearchBox_TextChanged"/>
+
+                        <TextBlock Text="Поиск по энциклопедии..."
+                                   Foreground="{StaticResource NordMutedSilverBrush}"
+                                   FontSize="15"
+                                   IsHitTestVisible="False"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Style="{StaticResource NordActionButton}" FontSize="14" Click="Assistant_Click"><StackPanel Orientation="Horizontal"><TextBlock Text="ИИ-помощник"/></StackPanel></Button>
+                        <Button Style="{StaticResource NordActionButton}" FontSize="14" Click="Filter_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconSearch}" Width="18" Height="18"/><TextBlock Text="Фильтры" Margin="8,0,0,0"/></StackPanel></Button>
+
+                        <Button Style="{StaticResource NordPrimaryButton}"
+                                Margin="10,0,0,0"
+                                FontSize="14"
+                                Click="CreateArticle_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconCreate}" Width="18" Height="18"/><TextBlock Text="Создать статью" Margin="8,0,0,0"/></StackPanel></Button>
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+
+            <!-- КОНТЕНТ -->
+
+            <Grid Grid.Row="1"
+                  Margin="30">
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/Theme/DarkSkyrim/nordic-stone-texture.png" Opacity="0.10" Stretch="UniformToFill"/>
+            </Grid.Background>
+
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="Auto"/>
+
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Grid.Row="0">
+
+                    <TextBlock x:Name="PageTitle"
+                               Text="Энциклопедия"
+                               Foreground="{StaticResource NordBlueGlowBrush}"
+                               FontSize="30"
+                               FontWeight="Bold"/>
+
+                    <TextBlock x:Name="PageDescription"
+                               Text="База знаний Skyrim RP"
+                               Foreground="{StaticResource NordMutedSilverBrush}"
+                               FontSize="14"
+                               Margin="0,6,0,25"/>
+
+                </StackPanel>
+
+
+                <!-- СПИСОК СТАТЕЙ -->
+
+                <Border Grid.Row="1"
+        Background="{StaticResource NordPanelBrush}"
+        BorderBrush="{StaticResource NordMutedSilverBrush}"
+        BorderThickness="1"
+        CornerRadius="6">
+
+    <Grid>
+
+        <ScrollViewer x:Name="ArticlesScrollViewer"
+                      Style="{StaticResource NordScrollViewer}">
+
+            <StackPanel x:Name="ArticlesPanel"
+                        Margin="20">
+
+            </StackPanel>
+
+        </ScrollViewer>
+        <views:ArticleCatalogView x:Name="CatalogView" Visibility="Collapsed"/>
+        <Grid x:Name="GraphContainer" Visibility="Collapsed"/>
+
+        <Grid x:Name="MapContainer"
+              Visibility="Collapsed">
+
+        </Grid>
+
+        <!-- Illustrated home dashboard. Article and map views retain their existing containers. -->
+        <ScrollViewer x:Name="WelcomeContainer" Style="{StaticResource NordScrollViewer}">
+            <StackPanel Margin="18">
+                <Border Style="{StaticResource ArchiveHeroFrame}">
+                    <Grid>
+                        <Rectangle Fill="#5A071016"/>
+                        <StackPanel VerticalAlignment="Top" Margin="28,24" Width="430" HorizontalAlignment="Left">
+                            <TextBlock Text="Энциклопедия" FontFamily="{StaticResource NordDisplayFont}" FontSize="38" FontWeight="Bold" Foreground="#F1DFC1"/>
+                            <Border Height="1" Background="#C69A62" Margin="0,10,0,14"/>
+                            <TextBlock Text="Архив историй, законов и легенд Skyrim RP" FontSize="17" Foreground="#E2D4C2" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="Разделы архива" FontFamily="{StaticResource NordDisplayFont}" FontSize="22" FontWeight="SemiBold" Foreground="#E7D1AC" Margin="4,22,0,12"/>
+                <WrapPanel Margin="4,0,0,20">
+                    <Button Style="{StaticResource ArchiveQuickAction}" Click="AllArticles_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconAllArticles}" Width="18" Height="18"/><StackPanel Margin="8,0,0,0"><TextBlock Text="Все материалы" FontWeight="SemiBold"/><TextBlock Text="Полный архив статей" FontSize="11" Foreground="{StaticResource NordMutedSilverBrush}"/></StackPanel></StackPanel></Button>
+                    <Button Style="{StaticResource ArchiveQuickAction}" Click="RecentArticles_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconRecent}" Width="18" Height="18"/><StackPanel Margin="8,0,0,0"><TextBlock Text="Недавно открытые" FontWeight="SemiBold"/><TextBlock Text="Вернуться к чтению" FontSize="11" Foreground="{StaticResource NordMutedSilverBrush}"/></StackPanel></StackPanel></Button>
+                    <Button Style="{StaticResource ArchiveQuickAction}" Click="Favorites_Click"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource IconFavorite}" Width="18" Height="18"/><StackPanel Margin="8,0,0,0"><TextBlock Text="Избранное" FontWeight="SemiBold"/><TextBlock Text="Сохранённые материалы" FontSize="11" Foreground="{StaticResource NordMutedSilverBrush}"/></StackPanel></StackPanel></Button>
+                </WrapPanel>
+                <WrapPanel>
+                    <Button Tag="Локации" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveLocationsBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Style="{x:Null}" Source="{StaticResource IconLocations}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Локации" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                    <Button Tag="Персонажи" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveCharactersBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Style="{x:Null}" Source="{StaticResource IconCharacters}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Персонажи" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                    <Button Tag="Фракции" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveFactionsBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Source="{StaticResource IconFactions}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Фракции" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                    <Button Tag="Лор Skyrim" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveLoreBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Source="{StaticResource IconLore}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Лор Skyrim" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                    <Button Tag="Боги и даэдра" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveGodsBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Source="{StaticResource IconGods}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Боги и даэдра" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                    <Button Tag="Правила RP" Style="{StaticResource ArchiveCategoryCard}" Background="{StaticResource ArchiveRulesBrush}" Click="Category_Click"><Border Style="{StaticResource ArchiveCategoryCaption}"><StackPanel><Image Source="{StaticResource IconRules}" Width="26" Height="26" HorizontalAlignment="Center" Margin="0,0,0,4"/><TextBlock Text="Правила RP" FontFamily="{StaticResource NordDisplayFont}" FontSize="16" FontWeight="SemiBold" Foreground="#241B14" HorizontalAlignment="Center"/></StackPanel></Border></Button>
+                </WrapPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+
+</Border>
+
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="ArchiveLoadingOverlay"
+              Grid.ColumnSpan="2"
+              Panel.ZIndex="100"
+              Background="#F0101720"
+              IsHitTestVisible="False">
+            <Border Width="430"
+                    Padding="36,30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="#E614222D"
+                    BorderBrush="#B99768"
+                    BorderThickness="1"
+                    CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" BlurRadius="24" ShadowDepth="4" Opacity="0.7"/>
+                </Border.Effect>
+                <StackPanel HorizontalAlignment="Center">
+                    <Image Style="{x:Null}" Source="/Assets/Theme/NordicArchive/Images/archive-crest.png" Width="74" Height="74" HorizontalAlignment="Center" Margin="0,0,0,13"/>
+                    <TextBlock Text="SKYRIM"
+                               FontFamily="{StaticResource NordDisplayFont}"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="#F2E4CB"
+                               HorizontalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#03070A" BlurRadius="7" ShadowDepth="2" Opacity="0.9"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="ENCYCLOPEDIA"
+                               FontFamily="{StaticResource NordDisplayFont}"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#C69A62"
+                               HorizontalAlignment="Center"
+                               Margin="0,1,0,18"/>
+                    <Border Height="1" Background="#806E98AA" Margin="12,0"/>
+                    <TextBlock Text="Собираем свитки, хроники и записи путешественников…"
+                               Foreground="#C8D7DE"
+                               FontSize="13"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="16,17,16,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</Window>

@@ -1,0 +1,45 @@
+# Build output, local caches, IDE state
+**/bin/
+**/obj/
+artifacts/
+.vs/
+.idea/
+*.user
+*.suo
+*.pdb
+
+# All databases are distributed separately, never via Git.
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.bak
+*.partial
+
+# Personal data, browser profiles and credentials
+**/WebView2/
+**/EBWebView/
+**/*.WebView2/
+**/Local Storage/
+**/Session Storage/
+**/IndexedDB/
+Cookies*
+Local State
+Login Data*
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+overlay-settings.json
+*.log
+
+# Distribution output and machine-specific QA records
+ReleaseStaging/
+InstallerOutput/
+*.zip
+*.7z
+*.exe
+METADATA_QA.md
+RELEASE_VERIFICATION.md
+findstr

@@ -1,0 +1,118 @@
+<Window x:Class="SkyrimRpEncyclopedia.ArticleLinkEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить связь"
+        Width="620"
+        Height="520"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource NordVoidBrush}"
+        Foreground="{StaticResource NordSilverBrush}"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/ThemeDefaults.xaml"/>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/DialogStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="28">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0"
+                   Text="Добавить связь"
+                   Style="{StaticResource DialogHeading}"
+                   FontSize="28"
+                   Margin="0,0,0,8"/>
+
+        <TextBlock Grid.Row="1"
+                   x:Name="SourceArticleText"
+                   Text="Исходная статья"
+                   Style="{StaticResource DialogLead}"
+                   Margin="0,0,0,25"/>
+
+        <!-- Статья -->
+        <StackPanel Grid.Row="2"
+                    Margin="0,0,0,18">
+
+            <TextBlock Text="Связать со статьёй" Style="{StaticResource DialogFieldLabel}"/>
+
+            <ComboBox x:Name="TargetArticleBox"
+                      Height="38"
+                      FontSize="15"
+                      Background="{StaticResource NordRaisedBrush}"
+                      Foreground="{StaticResource NordSilverBrush}"/>
+        </StackPanel>
+
+        <!-- Тип связи -->
+        <StackPanel Grid.Row="3"
+                    Margin="0,0,0,18">
+
+            <TextBlock Text="Тип связи" Style="{StaticResource DialogFieldLabel}"/>
+
+            <ComboBox x:Name="LinkTypeBox"
+                      Height="38"
+                      FontSize="15"
+                      Background="{StaticResource NordRaisedBrush}"
+                      Foreground="{StaticResource NordSilverBrush}">
+
+                <ComboBoxItem Content="связан с"/>
+                <ComboBoxItem Content="часть"/>
+                <ComboBoxItem Content="место"/>
+                <ComboBoxItem Content="персонаж"/>
+                <ComboBoxItem Content="фракция"/>
+                <ComboBoxItem Content="союзник"/>
+                <ComboBoxItem Content="противник"/>
+                <ComboBoxItem Content="религия"/>
+                <ComboBoxItem Content="упоминается в"/>
+                <ComboBoxItem Content="RP-связь"/>
+
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Описание -->
+        <StackPanel Grid.Row="4">
+
+            <TextBlock Text="Описание связи" Style="{StaticResource DialogFieldLabel}"/>
+
+            <TextBox x:Name="DescriptionBox"
+                     Height="100"
+                     FontSize="15"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     Background="{StaticResource NordRaisedBrush}"
+                     Foreground="{StaticResource NordSilverBrush}"
+                     Padding="10"/>
+        </StackPanel>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,25,0,0">
+
+            <Button Content="Отмена"
+                    Style="{StaticResource DialogSecondaryButton}"
+                    Margin="0,0,10,0"
+                    Click="Cancel_Click"/>
+
+            <Button Content="Создать связь"
+                    Style="{StaticResource DialogPrimaryButton}"
+                    MinWidth="145"
+                    Click="Save_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

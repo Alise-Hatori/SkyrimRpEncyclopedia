@@ -1,0 +1,46 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.MapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/ThemeDefaults.xaml"/>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/DialogStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel x:Name="MapControls" Margin="6,4">
+            <Button x:Name="BackButton" Content="Назад" Margin="0,0,6,4"
+                    Style="{StaticResource DialogSecondaryButton}" Padding="8,4" Height="Auto" MinWidth="0" Click="Back_Click"/>
+            <TextBlock Text="Карта:" Foreground="{StaticResource NordSilverBrush}" VerticalAlignment="Center" Margin="0,0,6,4"/>
+            <ComboBox x:Name="MapSelector" Width="126" Margin="0,0,6,4" MinHeight="28"
+                      DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="MapSelector_SelectionChanged"
+                      ToolTip="Выбранная карта общая для основного окна, оверлея и мини-карты"/>
+            <Button Content="Повторить" Style="{StaticResource DialogSecondaryButton}" Padding="8,4"
+                    Height="Auto" MinWidth="0" Margin="0,0,6,4" Click="Retry_Click"/>
+            <Button Content="В браузере" Style="{StaticResource DialogSecondaryButton}" Padding="8,4"
+                    ToolTip="Открыть выбранную карту в обычном браузере. Его сессия не переносится в приложение автоматически."
+                    Height="Auto" MinWidth="0" Margin="0,0,0,4" Click="OpenExternal_Click"/>
+        </WrapPanel>
+        <TextBlock x:Name="MapStatus" Grid.Row="1" Margin="8,0,8,5" Foreground="{StaticResource NordSilverBrush}"
+                   TextWrapping="Wrap" FontSize="11"/>
+
+        <wv2:WebView2CompositionControl x:Name="MapBrowser"
+                                         Grid.Row="2"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"/>
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,15 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="720" Background="{StaticResource NordVoidBrush}">
+    <!-- Standalone visual reference: open or embed this UserControl in a design host. -->
+    <StackPanel Margin="24">
+        <TextBlock Text="DARK SKYRIM / PREVIEW" Foreground="{StaticResource NordBlueGlowBrush}" FontSize="26" FontFamily="{StaticResource NordDisplayFont}"/>
+        <WrapPanel Margin="0,18,0,18">
+            <Button Style="{StaticResource NordActionButton}" Margin="0,0,10,0">Normal</Button>
+            <Button Style="{StaticResource NordPrimaryButton}" Margin="0,0,10,0">Primary</Button>
+            <Button Style="{StaticResource NordActionButton}" IsEnabled="False">Disabled</Button>
+        </WrapPanel>
+        <TextBox Style="{StaticResource NordSearchBox}" Text="Поиск по энциклопедии..." Width="420"/>
+        <Border Style="{StaticResource NordPanelStyle}" Margin="0,18,0,0" Padding="14"><StackPanel><TextBlock Text="Векторные иконки" Foreground="{StaticResource NordSilverBrush}"/><WrapPanel Margin="0,10,0,0"><Image Source="{StaticResource IconAllArticles}" Width="22" Height="22" Margin="0,0,14,0"/><Image Source="{StaticResource IconFactions}" Width="22" Height="22" Margin="0,0,14,0"/><Image Source="{StaticResource IconLocations}" Width="22" Height="22" Margin="0,0,14,0"/><Image Source="{StaticResource IconEvents}" Width="22" Height="22" Margin="0,0,14,0"/><Image Source="{StaticResource IconSearch}" Width="22" Height="22"/></WrapPanel></StackPanel></Border>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,64 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.EventsLibraryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource NordVoidBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/ThemeDefaults.xaml"/>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/DialogStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Мои ивенты" Style="{StaticResource DialogHeading}" FontSize="28"/>
+
+            <TextBlock Text="Сохранённые RP-ивенты и задания"
+                       Style="{StaticResource DialogLead}"
+                       Margin="0,5,0,18"
+                       FontSize="14"/>
+        </StackPanel>
+
+        <!-- Панель управления -->
+        <DockPanel Grid.Row="1"
+                   Margin="0,0,0,15">
+
+            <TextBox x:Name="SearchBox"
+                     Width="350"
+                     Height="34"
+                     Padding="10,6"
+                     FontSize="14"
+                     Style="{StaticResource NordSearchBox}"
+                     TextChanged="SearchBox_TextChanged"
+                     ToolTip="Поиск по названию, типу, месту, фракции..."/>
+
+            <Button Content="Обновить"
+                    Style="{StaticResource DialogSecondaryButton}"
+                    Margin="10,0,0,0"
+                    Click="Refresh_Click"/>
+
+            <Button Content="Назад"
+                    Style="{StaticResource DialogSecondaryButton}"
+                    Margin="10,0,0,0"
+                    Click="Back_Click"/>
+        </DockPanel>
+
+        <!-- Список -->
+        <ScrollViewer Grid.Row="2">
+
+            <StackPanel x:Name="EventsPanel"/>
+        </ScrollViewer>
+
+    </Grid>
+
+</UserControl>

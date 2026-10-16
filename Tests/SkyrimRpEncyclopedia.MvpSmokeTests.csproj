@@ -1,0 +1,100 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="System.Net.Http" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+    <Compile Include="..\Models\Article.cs" Link="Models\Article.cs" />
+    <Compile Include="..\Services\RpRulesCatalog.cs" Link="Services\RpRulesCatalog.cs" />
+    <Compile Include="..\Models\ArticleLink.cs" Link="Models\ArticleLink.cs" />
+    <Compile Include="..\Models\RpParameterField.cs" Link="Models\RpParameterField.cs" />
+    <Compile Include="..\Models\OverlayAppearance.cs" Link="Models\OverlayAppearance.cs" />
+    <Compile Include="..\Models\OverlaySettings.cs" Link="Models\OverlaySettings.cs" />
+    <Compile Include="..\Models\MapProvider.cs" Link="Models\MapProvider.cs" />
+    <Compile Include="..\Services\MapSelectionService.cs" Link="Services\MapSelectionService.cs" />
+    <Compile Include="..\Models\OverlayArticleContent.cs" Link="Models\OverlayArticleContent.cs" />
+    <Compile Include="..\Models\OverlayRelatedArticle.cs" Link="Models\OverlayRelatedArticle.cs" />
+    <Compile Include="..\Services\MvpKnowledgeDatabaseService.cs" Link="Services\MvpKnowledgeDatabaseService.cs" />
+    <Compile Include="..\Services\KnowledgeAssistantService.cs" Link="Services\KnowledgeAssistantService.cs" />
+    <Compile Include="..\Services\DatabaseService.cs" Link="Services\DatabaseService.cs" />
+    <Compile Include="..\Services\UserDatabasePreflight.cs" Link="Services\UserDatabasePreflight.cs" />
+    <Compile Include="..\Services\UserDataErrors.cs" Link="Services\UserDataErrors.cs" />
+    <Compile Include="..\Services\OverlayCrashDiagnostics.cs" Link="Services\OverlayCrashDiagnostics.cs" />
+    <Compile Include="..\MetadataManagerWindow.xaml.cs" Link="MetadataManagerWindow.xaml.cs" />
+    <Page Include="..\MetadataManagerWindow.xaml" Link="MetadataManagerWindow.xaml" />
+    <Compile Include="..\Models\MetadataCatalogModels.cs" Link="Models\MetadataCatalogModels.cs" />
+    <Compile Include="..\Services\MetadataPresetCatalog.cs" Link="Services\MetadataPresetCatalog.cs" />
+    <Compile Include="..\Services\MetadataCatalogService.cs" Link="Services\MetadataCatalogService.cs" />
+    <Compile Include="..\MetadataPresetsWindow.xaml.cs" Link="MetadataPresetsWindow.xaml.cs" />
+    <Page Include="..\MetadataPresetsWindow.xaml" Link="MetadataPresetsWindow.xaml" />
+    <Compile Include="..\ArticleEditorWindow.xaml.cs" Link="ArticleEditorWindow.xaml.cs" />
+    <Page Include="..\ArticleEditorWindow.xaml" Link="ArticleEditorWindow.xaml" />
+    <Compile Include="..\MetadataSelectionWindow.xaml.cs" Link="MetadataSelectionWindow.xaml.cs" />
+    <Page Include="..\MetadataSelectionWindow.xaml" Link="MetadataSelectionWindow.xaml" />
+    <Compile Include="..\OfficialDatabaseService.cs" Link="Services\OfficialDatabaseService.cs" />
+    <Compile Include="..\Services\RpEventParameterService.cs" Link="Services\RpEventParameterService.cs" />
+    <Compile Include="..\Services\ArticleSectionMatcher.cs" Link="Services\ArticleSectionMatcher.cs" />
+    <Compile Include="..\Services\ArticleGraphTypeClassifier.cs" Link="Services\ArticleGraphTypeClassifier.cs" />
+    <Compile Include="..\Services\OverlaySettingsService.cs" Link="Services\OverlaySettingsService.cs" />
+    <Compile Include="..\Models\ArticleNote.cs" Link="Models\ArticleNote.cs" />
+    <Compile Include="..\Models\ArticleReference.cs" Link="Models\ArticleReference.cs" />
+    <Compile Include="..\Models\ArticleSource.cs" Link="Models\ArticleSource.cs" />
+    <Compile Include="..\Models\ContentCategory.cs" Link="Models\ContentCategory.cs" />
+    <Compile Include="..\Models\ContentFlag.cs" Link="Models\ContentFlag.cs" />
+    <Compile Include="..\Models\ContentTag.cs" Link="Models\ContentTag.cs" />
+    <Compile Include="..\Models\RpEvent.cs" Link="Models\RpEvent.cs" />
+    <Compile Include="..\Models\ScenarioModels.cs" Link="Models\ScenarioModels.cs" />
+    <Compile Include="..\Models\ScenarioKnowledgeModels.cs" Link="Models\ScenarioKnowledgeModels.cs" />
+    <Compile Include="..\Services\ScenarioGeneratorService.cs" Link="Services\ScenarioGeneratorService.cs" />
+    <Compile Include="..\Services\ScenarioInvestigationBlueprintFactory.cs" Link="Services\ScenarioInvestigationBlueprintFactory.cs" />
+    <Compile Include="..\Services\ScenarioIntrigueBlueprintFactory.cs" Link="Services\ScenarioIntrigueBlueprintFactory.cs" />
+    <Compile Include="..\Services\ScenarioMissionBlueprintFactory.cs" Link="Services\ScenarioMissionBlueprintFactory.cs" />
+    <Compile Include="..\Services\ScenarioNegotiationBlueprintFactory.cs" Link="Services\ScenarioNegotiationBlueprintFactory.cs" />
+    <Compile Include="..\Services\ScenarioKnowledgeCatalog.cs" Link="Services\ScenarioKnowledgeCatalog.cs" />
+    <Compile Include="..\Services\ScenarioCanonicalAnchorSelector.cs" Link="Services\ScenarioCanonicalAnchorSelector.cs" />
+    <Compile Include="..\Services\ScenarioCanonicalAnchorApplicator.cs" Link="Services\ScenarioCanonicalAnchorApplicator.cs" />
+    <Compile Include="..\Services\ScenarioExportService.cs" Link="Services\ScenarioExportService.cs" />
+    <Compile Include="..\Services\ScenarioTextFormatter.cs" Link="Services\ScenarioTextFormatter.cs" />
+    <Compile Include="..\Services\ArticleCatalogReader.cs" Link="Services\ArticleCatalogReader.cs" />
+    <Compile Include="..\Services\ArticleFilterRules.cs" Link="Services\ArticleFilterRules.cs" />
+    <Compile Include="..\Views\ArticleCatalogView.xaml.cs" Link="Views\ArticleCatalogView.xaml.cs" />
+    <Page Include="..\Views\ArticleCatalogView.xaml" Link="Views\ArticleCatalogView.xaml" />
+    <Compile Include="..\Services\ScenarioGeneratorState.cs" Link="Services\ScenarioGeneratorState.cs" />
+    <Compile Include="..\Models\RpSimpleEventModels.cs" Link="Models\RpSimpleEventModels.cs" />
+    <Compile Include="..\Services\RpSimpleEventTemplates.cs" Link="Services\RpSimpleEventTemplates.cs" />
+    <Compile Include="..\Services\RpSimpleEventGeneratorService.cs" Link="Services\RpSimpleEventGeneratorService.cs" />
+    <Compile Include="..\Services\RpSimpleEventValidator.cs" Link="Services\RpSimpleEventValidator.cs" />
+    <Compile Include="..\Services\RpSimpleEventTextFormatter.cs" Link="Services\RpSimpleEventTextFormatter.cs" />
+    <Compile Include="..\Views\RpSimpleEventGeneratorView.xaml.cs" Link="Views\RpSimpleEventGeneratorView.xaml.cs" />
+    <Page Include="..\Views\RpSimpleEventGeneratorView.xaml" Link="Views\RpSimpleEventGeneratorView.xaml" />
+    <Compile Include="..\Views\GraphView.xaml.cs" Link="Views\GraphView.xaml.cs" />
+    <Compile Include="..\Views\GraphEdgeLayer.cs" Link="Views\GraphEdgeLayer.cs" />
+    <Compile Include="..\Models\GraphModels.cs" Link="Models\GraphModels.cs" />
+    <Compile Include="..\Models\GraphMapModels.cs" Link="Models\GraphMapModels.cs" />
+    <Compile Include="..\Services\GraphMapReader.cs" Link="Services\GraphMapReader.cs" />
+    <Compile Include="..\Services\GraphMapLayout.cs" Link="Services\GraphMapLayout.cs" />
+    <Compile Include="..\Services\GraphCamera.cs" Link="Services\GraphCamera.cs" />
+    <Compile Include="..\Views\GraphView.Map.cs" Link="Views\GraphView.Map.cs" />
+    <Compile Include="..\Views\GraphMapLayer.cs" Link="Views\GraphMapLayer.cs" />
+    <Compile Include="..\Services\GraphDataReader.cs" Link="Services\GraphDataReader.cs" />
+    <Compile Include="..\Services\GraphExplorerState.cs" Link="Services\GraphExplorerState.cs" />
+    <Page Include="..\Views\GraphView.xaml" Link="Views\GraphView.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\GraphStyles.xaml" Link="Assets\Theme\DarkSkyrim\GraphStyles.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\Colors.xaml" Link="Assets\Theme\DarkSkyrim\Colors.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\Icons.xaml" Link="Assets\Theme\DarkSkyrim\Icons.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\Controls.xaml" Link="Assets\Theme\DarkSkyrim\Controls.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\ThemeDefaults.xaml" Link="Assets\Theme\DarkSkyrim\ThemeDefaults.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\DialogStyles.xaml" Link="Assets\Theme\DarkSkyrim\DialogStyles.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\MetadataIcons.xaml" Link="Assets\Theme\DarkSkyrim\MetadataIcons.xaml" />
+    <Page Include="..\Assets\Theme\DarkSkyrim\MetadataStyles.xaml" Link="Assets\Theme\DarkSkyrim\MetadataStyles.xaml" />
+    <Page Include="..\Assets\Theme\NordicArchive\Visuals.xaml" Link="Assets\Theme\NordicArchive\Visuals.xaml" />
+    <Resource Include="..\Assets\Theme\NordicArchive\Images\*.png" Link="Assets\Theme\NordicArchive\Images\%(Filename)%(Extension)" />
+    <Resource Include="..\Assets\Theme\DarkSkyrim\nordic-stone-texture.png" Link="Assets\Theme\DarkSkyrim\nordic-stone-texture.png" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Branding\SkyrimRpEncyclopedia.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tests\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Required for pack-URI references from the reusable WPF theme dictionaries. -->
+    <Resource Include="Assets\Theme\DarkSkyrim\nordic-stone-texture.png" />
+    <Resource Include="Assets\Theme\NordicArchive\Images\*.png" />
+    <Resource Include="Assets\Branding\SkyrimRpEncyclopedia.ico" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,111 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <SolidColorBrush x:Key="AtlasGoldBrush" Color="#C7A46A"/>
+    <SolidColorBrush x:Key="AtlasPaleGoldBrush" Color="#ECD8AF"/>
+    <SolidColorBrush x:Key="AtlasEdgeBrush" Color="#35414B"/>
+    <LinearGradientBrush x:Key="AtlasPanelBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#1A232C" Offset="0"/><GradientStop Color="#10161F" Offset="1"/>
+    </LinearGradientBrush>
+    <RadialGradientBrush x:Key="AtlasMapBrush" Center="0.5,0.42" GradientOrigin="0.5,0.42" RadiusX="0.7" RadiusY="0.8">
+        <GradientStop Color="#182F3C" Offset="0"/><GradientStop Color="#0C1520" Offset="0.6"/><GradientStop Color="#070C12" Offset="1"/>
+    </RadialGradientBrush>
+    <ImageBrush x:Key="AtlasStoneTexture" ImageSource="/Assets/Theme/DarkSkyrim/nordic-stone-texture.png" Stretch="UniformToFill"/>
+    <Style x:Key="AtlasPanel" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource AtlasPanelBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AtlasEdgeBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="5"/>
+    </Style>
+    <Style x:Key="AtlasLabel" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NordSilverBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource NordBodyFont}"/>
+        <Setter Property="FontSize" Value="13"/><Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style x:Key="AtlasHeading" TargetType="TextBlock" BasedOn="{StaticResource AtlasLabel}">
+        <Setter Property="Foreground" Value="{StaticResource AtlasPaleGoldBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource NordDisplayFont}"/><Setter Property="FontSize" Value="18"/>
+    </Style>
+    <Style x:Key="AtlasAction" TargetType="Button">
+        <Setter Property="Background" Value="#1B2834"/>
+        <Setter Property="Foreground" Value="#B8C6CD"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10,6"/><Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="0,0,6,6"/><Setter Property="BorderBrush" Value="{StaticResource AtlasEdgeBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Frame" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="BorderBrush" Value="#C7A46A"/><Setter TargetName="Frame" Property="Background" Value="#223746"/><Setter Property="Foreground" Value="#ECD8AF"/></Trigger>
+                        <Trigger Property="IsPressed" Value="True"><Setter TargetName="Frame" Property="Background" Value="#172A34"/></Trigger>
+                        <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.4"/></Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AtlasPrimaryAction" TargetType="Button" BasedOn="{StaticResource AtlasAction}">
+        <Setter Property="Foreground" Value="{StaticResource AtlasPaleGoldBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AtlasGoldBrush}"/><Setter Property="Background" Value="#29271F"/>
+    </Style>
+    <Style x:Key="AtlasCheckBox" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource NordSilverBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource NordBodyFont}"/>
+        <Setter Property="FontSize" Value="13"/><Setter Property="Margin" Value="0,5"/>
+    </Style>
+    <Style x:Key="AtlasSearch" TargetType="TextBox">
+        <Setter Property="Background" Value="#0B1219"/><Setter Property="Foreground" Value="#B8C6CD"/>
+        <Setter Property="BorderBrush" Value="#748695"/><Setter Property="CaretBrush" Value="#A7E9FA"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Frame" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="Frame" Property="BorderBrush" Value="#69C9E8"/></Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AtlasScrollArea" TargetType="RepeatButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RepeatButton"><Border Background="{TemplateBinding Background}"/></ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <Style TargetType="ScrollBar">
+        <Setter Property="Width" Value="9"/>
+        <Setter Property="Background" Value="#101820"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Track x:Name="PART_Track" Orientation="{TemplateBinding Orientation}" IsDirectionReversed="True"
+                               Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value}" ViewportSize="{TemplateBinding ViewportSize}">
+                            <Track.DecreaseRepeatButton><RepeatButton x:Name="AtlasDecrease" Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource AtlasScrollArea}"/></Track.DecreaseRepeatButton>
+                            <Track.Thumb><Thumb Background="#465660"><Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="{TemplateBinding Background}" CornerRadius="4" Margin="2,0"/></ControlTemplate></Thumb.Template></Thumb></Track.Thumb>
+                            <Track.IncreaseRepeatButton><RepeatButton x:Name="AtlasIncrease" Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource AtlasScrollArea}"/></Track.IncreaseRepeatButton>
+                        </Track>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="False"/>
+                            <Setter TargetName="AtlasDecrease" Property="Command" Value="{x:Static ScrollBar.PageLeftCommand}"/>
+                            <Setter TargetName="AtlasIncrease" Property="Command" Value="{x:Static ScrollBar.PageRightCommand}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal"><Setter Property="Width" Value="Auto"/><Setter Property="Height" Value="9"/></Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

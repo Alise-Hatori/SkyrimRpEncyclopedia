@@ -1,0 +1,16 @@
+﻿<Application x:Class="SkyrimRpEncyclopedia.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SkyrimRpEncyclopedia"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Theme/DarkSkyrim/Colors.xaml"/>
+                <ResourceDictionary Source="Assets/Theme/DarkSkyrim/Icons.xaml"/>
+                <ResourceDictionary Source="Assets/Theme/DarkSkyrim/Controls.xaml"/>
+                <ResourceDictionary Source="Assets/Theme/NordicArchive/Visuals.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

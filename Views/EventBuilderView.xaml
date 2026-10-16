@@ -1,0 +1,92 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.EventBuilderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource NordVoidBrush}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/ThemeDefaults.xaml"/>
+                <ResourceDictionary Source="/Assets/Theme/DarkSkyrim/DialogStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource NordStoneBrush}" BorderBrush="{StaticResource NordMutedSilverBrush}" BorderThickness="0,0,0,1" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Конструктор ивентов" Style="{StaticResource DialogHeading}"/>
+                    <TextBlock Text="Список содержит варианты; в каждое поле можно вписать свой игровой ввод." Style="{StaticResource DialogLead}" FontSize="13"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Назад" Style="{StaticResource DialogSecondaryButton}" Click="Back_Click"/>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource NordPanelStyle}" Padding="18">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Параметры события" Foreground="{StaticResource NordSilverBrush}" FontFamily="{StaticResource NordDisplayFont}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                        <TextBlock Text="«Случайно» — генератор подбирает вариант; «Не задано» доступно для необязательных полей. Кнопка обновления меняет только этот параметр." Style="{StaticResource DialogLead}" FontSize="12" Margin="0,0,0,12"/>
+
+                        <ItemsControl x:Name="ParametersList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,0,13">
+                                        <Grid Margin="0,0,0,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Label}" Foreground="{StaticResource NordMutedSilverBrush}" FontSize="12"/>
+                                            <Button Grid.Column="1" Content="↻" Width="32" Height="22" Padding="0" ToolTip="Сгенерировать только этот параметр" Tag="{Binding}" Click="RerollParameter_Click"/>
+                                        </Grid>
+                                        <ComboBox Height="34" IsEditable="True" IsTextSearchEnabled="True"
+                                                  ItemsSource="{Binding Options}"
+                                                  Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Background="{StaticResource NordRaisedBrush}" Foreground="{StaticResource NordSilverBrush}" BorderBrush="{StaticResource NordMutedSilverBrush}" Padding="8"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,7,0,0">
+                            <Button Content="Сгенерировать" Style="{StaticResource DialogPrimaryButton}" MinWidth="180" Height="38" Click="Generate_Click"/>
+                            <Button Content="Новый ивент / Очистить" Style="{StaticResource DialogSecondaryButton}" Margin="10,0,0,0" Height="38" Click="Clear_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource NordPanelStyle}" Padding="18">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Готовый RP-текст" Foreground="{StaticResource NordSilverBrush}" FontFamily="{StaticResource NordDisplayFont}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                    <TextBox x:Name="ResultBox" Grid.Row="1" Padding="15" FontSize="14" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                        <Button Content="Копировать" Style="{StaticResource DialogSecondaryButton}" MinWidth="140" Click="Copy_Click"/>
+                        <Button x:Name="SaveButton" Content="Сохранить ивент" Style="{StaticResource DialogPrimaryButton}" MinWidth="170" Margin="10,0,0,0" Click="Save_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

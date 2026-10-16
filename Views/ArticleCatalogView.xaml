@@ -1,0 +1,44 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.ArticleCatalogView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ListBox x:Name="CatalogList" Background="Transparent" BorderThickness="0"
+          ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+          VirtualizingPanel.ScrollUnit="Pixel">
+  <ListBox.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel/></ItemsPanelTemplate></ListBox.ItemsPanel>
+  <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
+   <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+   <Setter Property="Padding" Value="0"/>
+  </Style></ListBox.ItemContainerStyle>
+  <ListBox.ItemTemplate><DataTemplate>
+   <Border Style="{DynamicResource NordArticleCard}" Margin="20,8" Padding="16" MouseLeftButtonUp="Card_Click">
+    <StackPanel>
+     <TextBlock Text="{Binding Title}" Style="{DynamicResource NordArticleTitle}" TextWrapping="Wrap"/>
+     <TextBlock Foreground="LightSkyBlue" FontSize="11" Margin="0,4">
+      <TextBlock.Style><Style TargetType="TextBlock">
+       <Setter Property="Text" Value="ЛИЧНЫЙ МАТЕРИАЛ"/>
+       <Style.Triggers>
+        <DataTrigger Binding="{Binding IsOfficial}" Value="True"><Setter Property="Text" Value="ОФИЦИАЛЬНЫЙ АРХИВ"/></DataTrigger>
+        <DataTrigger Binding="{Binding IsMvp}" Value="True"><Setter Property="Text" Value="MVP-БАЗА"/></DataTrigger>
+        <DataTrigger Binding="{Binding IsRpRule}" Value="True"><Setter Property="Text" Value="RP-ПРАВИЛА · НЕ КАНОН WIKI"/></DataTrigger>
+       </Style.Triggers>
+      </Style></TextBlock.Style>
+     </TextBlock>
+     <TextBlock Text="{Binding Category}" Style="{DynamicResource NordMetadataText}"/>
+     <TextBlock Text="{Binding Summary}" Foreground="{DynamicResource NordSilverBrush}" TextWrapping="Wrap" Margin="0,8"/>
+     <TextBlock Text="{Binding Tags}" Style="{DynamicResource NordMetadataText}"/>
+     <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+      <Button Content="Открыть" Style="{DynamicResource NordOpenButton}" Click="Open_Click"/>
+      <StackPanel Orientation="Horizontal">
+       <StackPanel.Style><Style TargetType="StackPanel"><Style.Triggers>
+        <DataTrigger Binding="{Binding IsOfficial}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+       </Style.Triggers></Style></StackPanel.Style>
+       <Button Content="✏ Изменить" Margin="8,0,0,0" Style="{DynamicResource NordActionButton}" Click="Edit_Click"/>
+       <Button Content="🗑 Удалить" Margin="8,0,0,0" Style="{DynamicResource NordDangerButton}" Click="Delete_Click"/>
+      </StackPanel>
+     </StackPanel>
+    </StackPanel>
+   </Border>
+  </DataTemplate></ListBox.ItemTemplate>
+ </ListBox>
+</UserControl>

@@ -1,0 +1,160 @@
+<Window x:Class="SkyrimRpEncyclopedia.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:SkyrimRpEncyclopedia.Views"
+        Title="Skyrim RP Overlay"
+        Width="460" Height="520" MinWidth="320" MinHeight="240"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="CanResizeWithGrip" Topmost="True" ShowInTaskbar="False">
+    <Window.Resources>
+        <SolidColorBrush x:Key="OverlayBackgroundBrush" Color="#E61B1E20"/>
+        <SolidColorBrush x:Key="OverlayBorderBrush" Color="#7F9098"/>
+        <SolidColorBrush x:Key="OverlayPrimaryTextBrush" Color="#E7EAEB"/>
+        <SolidColorBrush x:Key="OverlaySecondaryTextBrush" Color="#AFBBC0"/>
+        <SolidColorBrush x:Key="OverlayContentTextBrush" Color="#D6DCDE"/>
+        <SolidColorBrush x:Key="OverlaySurfaceBrush" Color="#B515181A"/>
+        <SolidColorBrush x:Key="OverlayButtonBrush" Color="#2B293236"/>
+        <SolidColorBrush x:Key="OverlayHoverBrush" Color="#2B293236"/>
+        <SolidColorBrush x:Key="OverlayAccentBrush" Color="#93AAB4"/>
+        <Style x:Key="OverlayActionButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="{DynamicResource OverlayPrimaryTextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="2">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Root" Property="Background" Value="{DynamicResource OverlayHoverBrush}"/></Trigger>
+                            <Trigger Property="IsPressed" Value="True"><Setter TargetName="Root" Property="Opacity" Value="0.7"/></Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource OverlayAccentBrush}"/><Setter TargetName="Root" Property="BorderThickness" Value="1"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RelatedArticleButtonStyle" TargetType="Button" BasedOn="{StaticResource OverlayActionButtonStyle}">
+            <Setter Property="Padding" Value="9,6"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+    <Window.ContextMenu>
+        <ContextMenu x:Name="OverlayContextMenu" Background="{DynamicResource OverlayBackgroundBrush}" BorderBrush="{DynamicResource OverlayBorderBrush}" Opened="OverlayContextMenu_Opened">
+            <ContextMenu.Resources>
+                <SolidColorBrush x:Key="ContextPrimaryBrush" Color="#E7EAEB"/>
+                <SolidColorBrush x:Key="ContextHoverBrush" Color="#2B293236"/>
+                <SolidColorBrush x:Key="ContextAccentBrush" Color="#93AAB4"/>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Foreground" Value="{DynamicResource ContextPrimaryBrush}"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Padding" Value="12,6"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ContextHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource ContextAccentBrush}"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ContextMenu.Resources>
+            <MenuItem Header="Настройки внешнего вида" Click="AppearanceSettings_Click"/>
+            <MenuItem Header="Карта">
+                <MenuItem x:Name="NordCoreMapMenuItem" Header="NordCore" IsCheckable="True" Tag="nordcore" Click="SelectMap_Click"/>
+                <MenuItem x:Name="SkyRpMapMenuItem" Header="SkyRP Map" IsCheckable="True" Tag="skyrp" Click="SelectMap_Click"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem x:Name="CompactModeMenuItem" Header="Компактный режим" IsCheckable="True" Click="CompactModeMenuItem_Click"/>
+            <MenuItem x:Name="PositionLockMenuItem" Header="Закрепить положение" IsCheckable="True" Click="PositionLockMenuItem_Click"/>
+            <Separator/>
+            <MenuItem Header="Скрыть оверлей" Click="HideOverlayMenuItem_Click"/>
+            <MenuItem Header="Сбросить оформление" Click="ResetAppearanceMenuItem_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <Border x:Name="OverlayBorder" Background="{DynamicResource OverlayBackgroundBrush}" BorderBrush="{DynamicResource OverlayBorderBrush}" BorderThickness="1" CornerRadius="5" Padding="14">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="OverlayHeaderPanel" Grid.Row="0" Margin="0,0,0,10" MouseLeftButtonDown="Header_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="4"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource OverlayAccentBrush}" CornerRadius="1" Margin="0,1,10,2"/>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="ПОЛЕВОЙ АРХИВ ТАМРИЭЛЯ" Foreground="{DynamicResource OverlayPrimaryTextBrush}" FontWeight="SemiBold" FontSize="13" FontStretch="SemiCondensed"/>
+                        <TextBlock Text="Справочник Skyrim RP" Foreground="{DynamicResource OverlaySecondaryTextBrush}" FontSize="11" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Grid>
+                <Button Grid.Column="1" Style="{StaticResource OverlayActionButtonStyle}" Content="Скрыть" Margin="10,0,0,0" Click="Hide_Click"/>
+            </Grid>
+            <StackPanel x:Name="OverlayControlsPanel" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+                <TextBlock Text="ПРОЗРАЧНОСТЬ" Foreground="{DynamicResource OverlaySecondaryTextBrush}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="10" FontStretch="SemiCondensed"/>
+                <Slider x:Name="OpacitySlider" Minimum="0.35" Maximum="1" Value="0.9" Width="130" ValueChanged="OpacitySlider_ValueChanged"/>
+                <Button Style="{StaticResource OverlayActionButtonStyle}" Content="Мини-карта" Margin="8,0,0,0" Click="MiniMapToggle_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="ArticleMetadataPanel" Grid.Row="2" Margin="0,0,0,12">
+                <TextBlock x:Name="ArticleCategoryText" Foreground="{DynamicResource OverlayAccentBrush}" FontSize="11" FontWeight="SemiBold" FontStretch="SemiCondensed" TextWrapping="Wrap"/>
+                <TextBlock x:Name="ArticleTitleText" Foreground="{DynamicResource OverlayPrimaryTextBrush}" FontWeight="SemiBold" FontSize="19" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                <Button x:Name="SourceButton" Style="{StaticResource OverlayActionButtonStyle}" Content="Открыть источник" HorizontalAlignment="Left" Margin="-8,6,0,0" Visibility="Collapsed" Click="Source_Click"/>
+            </StackPanel>
+            <Border x:Name="MapContainer" Grid.Row="3" Height="220" Margin="0,0,0,8" Background="{DynamicResource OverlaySurfaceBrush}" BorderBrush="{DynamicResource OverlayBorderBrush}" BorderThickness="1" Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Margin="6,4">
+                        <TextBlock Text="Мини-карта Skyrim" Foreground="{DynamicResource OverlayPrimaryTextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        <Button x:Name="MapToggleButton" DockPanel.Dock="Right" Style="{StaticResource OverlayActionButtonStyle}" Content="Скрыть" Click="MapToggle_Click"/>
+                    </DockPanel>
+                    <views:MapView x:Name="OverlayMap" Grid.Row="1"/>
+                </Grid>
+            </Border>
+            <StackPanel x:Name="MapControlsPanel" Grid.Row="4" Margin="0,0,0,8">
+                <DockPanel>
+                    <TextBlock Text="Высота карты" Foreground="{DynamicResource OverlaySecondaryTextBrush}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="11"/>
+                    <Button x:Name="MapControlToggleButton" DockPanel.Dock="Right" Style="{StaticResource OverlayActionButtonStyle}" Content="Показать карту" Click="MapToggle_Click"/>
+                    <Slider x:Name="MapHeightSlider" Minimum="130" Maximum="360" Value="220" ValueChanged="MapHeightSlider_ValueChanged"/>
+                </DockPanel>
+            </StackPanel>
+            <ScrollViewer x:Name="ArticleScrollViewer" Grid.Row="5" Margin="0,0,0,10"
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                          CanContentScroll="False" Background="{DynamicResource OverlaySurfaceBrush}">
+                <StackPanel x:Name="ArticleContentPanel" Margin="8">
+                    <TextBlock x:Name="ArticleContentText" Foreground="{DynamicResource OverlayContentTextBrush}" FontSize="14" LineHeight="22" TextWrapping="Wrap"/>
+                    <StackPanel x:Name="RelatedArticlesPanel">
+                        <Separator Margin="0,16,0,12" Background="{DynamicResource OverlayBorderBrush}"/>
+                        <TextBlock x:Name="RelatedHeaderText" Text="СВЯЗАННЫЕ СТАТЬИ" Foreground="{DynamicResource OverlaySecondaryTextBrush}" FontWeight="SemiBold" FontSize="11" FontStretch="SemiCondensed" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="RelatedEmptyText" Text="Связанные статьи не найдены" Foreground="{DynamicResource OverlaySecondaryTextBrush}" FontSize="12"/>
+                        <ItemsControl x:Name="RelatedArticlesItems">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource RelatedArticleButtonStyle}" Margin="0,2,0,0" Click="RelatedArticle_Click">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Article.Title}" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding RelationType}" Foreground="{DynamicResource OverlaySecondaryTextBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <TextBlock x:Name="OverlayHintText" Grid.Row="6" Text="ПКМ — параметры оформления и режимы оверлея." Foreground="{DynamicResource OverlaySecondaryTextBrush}" FontSize="10" TextWrapping="Wrap"/>
+        </Grid>
+    </Border>
+</Window>

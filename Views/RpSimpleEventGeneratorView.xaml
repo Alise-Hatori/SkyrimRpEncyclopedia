@@ -1,0 +1,66 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.RpSimpleEventGeneratorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style x:Key="EventLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E1E6E9"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="EventHeading" TargetType="TextBlock" BasedOn="{StaticResource EventLabel}">
+            <Setter Property="Foreground" Value="#F0DFC4"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="EventReadableText" TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Background" Value="#101922"/>
+            <Setter Property="Foreground" Value="#F4F7F8"/>
+            <Setter Property="BorderBrush" Value="#688494"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+    </UserControl.Resources>
+    <!-- MainWindow supplies the existing outer scroll viewer: no second nested scroll area. -->
+    <StackPanel Margin="20" MaxWidth="1100" HorizontalAlignment="Stretch">
+        <TextBlock Text="Генератор простых ивентов" Style="{StaticResource EventHeading}" FontSize="24" Margin="0,0,0,8"/>
+        <TextBlock x:Name="MaterialNoticeText" Style="{StaticResource EventLabel}" Margin="0,0,0,8"/>
+        <TextBlock Text="Новое событие учитывает недавние шаблоны. Повтор по seed игнорирует историю: при одинаковых параметрах воспроизводится один результат, который может отличаться от последнего события с учётом истории. Seed не меняется автоматически."
+                   Style="{StaticResource EventLabel}" Margin="0,0,0,16"/>
+        <WrapPanel>
+            <StackPanel Margin="0,0,12,12"><TextBlock Text="Тематика" Style="{StaticResource EventLabel}"/>
+                <ComboBox x:Name="ThemeBox" Width="270" SelectionChanged="Parameter_Changed"/></StackPanel>
+            <StackPanel Margin="0,0,12,12"><TextBlock Text="Длительность, минут" Style="{StaticResource EventLabel}"/>
+                <ComboBox x:Name="DurationBox" Width="160" SelectionChanged="Parameter_Changed"/></StackPanel>
+            <StackPanel Margin="0,0,12,12"><TextBlock Text="Seed (целое число)" Style="{StaticResource EventLabel}"/>
+                <TextBox x:Name="SeedBox" Width="160" Text="0" TextChanged="Seed_Changed" Padding="6"/></StackPanel>
+        </WrapPanel>
+        <TextBlock Text="Место" Style="{StaticResource EventLabel}"/>
+        <ComboBox x:Name="LocationBox" SelectionChanged="Parameter_Changed" Margin="0,3,0,12"/>
+        <TextBlock Text="Время (описание RP, не календарная запись)" Style="{StaticResource EventLabel}"/>
+        <ComboBox x:Name="TimeBox" SelectionChanged="Parameter_Changed" Margin="0,3,0,12"/>
+        <WrapPanel Margin="0,0,0,12">
+            <Button x:Name="GenerateButton" Content="Новое событие" Style="{DynamicResource NordActionButton}" Padding="12,6" Margin="0,0,10,6" Click="Generate_Click"/>
+            <Button x:Name="ReplayButton" Content="Повтор по seed (без истории)" Style="{DynamicResource NordActionButton}" Padding="12,6" Margin="0,0,0,6" Click="Replay_Click"/>
+        </WrapPanel>
+        <TextBlock x:Name="FeedbackText" Style="{StaticResource EventLabel}" Margin="0,0,0,8"/>
+        <TextBlock x:Name="DiagnosticText" Style="{StaticResource EventLabel}" Foreground="#FFD18A" Margin="0,0,0,12"/>
+        <TextBlock x:Name="IdentityText" Style="{StaticResource EventLabel}" Margin="0,0,0,12"/>
+        <Expander Header="Публичное объявление" IsExpanded="True" Foreground="#F0DFC4" Margin="0,0,0,16">
+            <StackPanel>
+                <Button x:Name="CopyAnnouncementButton" Content="Копировать объявление" Style="{DynamicResource NordActionButton}" Padding="12,6" HorizontalAlignment="Left" Margin="0,8" IsEnabled="False" Click="CopyAnnouncement_Click"/>
+                <TextBox x:Name="AnnouncementText" Style="{StaticResource EventReadableText}"/>
+            </StackPanel>
+        </Expander>
+        <Expander Header="Только ведущему: завязка и идеи" IsExpanded="True" Foreground="#F0DFC4">
+            <StackPanel>
+                <Button x:Name="CopyGmButton" Content="Копировать заметки ведущего" Style="{DynamicResource NordActionButton}" Padding="12,6" HorizontalAlignment="Left" Margin="0,8" IsEnabled="False" Click="CopyGm_Click"/>
+                <TextBox x:Name="GmNotesText" Style="{StaticResource EventReadableText}"/>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,96 @@
+<UserControl x:Class="SkyrimRpEncyclopedia.Views.ScenarioGeneratorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style x:Key="ScenarioHeadingText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#F0DFC4"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="ScenarioLeadText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E1E6E9"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="ScenarioReadableText" TargetType="TextBox" BasedOn="{StaticResource NordSearchBox}">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="#F4F7F8"/>
+            <Setter Property="Background" Value="#101922"/>
+            <Setter Property="BorderBrush" Value="#688494"/>
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="Margin" Value="0,4,0,4"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        <Style x:Key="ScenarioStatusText" TargetType="TextBox" BasedOn="{StaticResource ScenarioReadableText}">
+            <Setter Property="Background" Value="#142633"/>
+            <Setter Property="BorderBrush" Value="#86AFC1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+        <Style x:Key="ScenarioActionButton" TargetType="Button" BasedOn="{StaticResource NordActionButton}">
+            <Setter Property="Foreground" Value="#F4F7F8"/>
+            <Setter Property="Background" Value="#173142"/>
+            <Setter Property="BorderBrush" Value="#7FA1B1"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="ScenarioPrimaryButton" TargetType="Button" BasedOn="{StaticResource ScenarioActionButton}">
+            <Setter Property="Background" Value="#1E5064"/>
+            <Setter Property="BorderBrush" Value="#A9D6E5"/>
+        </Style>
+        <Style x:Key="ScenarioCopyButton" TargetType="Button" BasedOn="{StaticResource ScenarioActionButton}">
+            <Setter Property="Content" Value="Копировать"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="9,3"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0,2,0,2"/>
+        </Style>
+        <Style x:Key="ScenarioMetaText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#D5E1E6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="8">
+            <TextBlock Text="Рабочее ядро RP-генератора" Style="{StaticResource ScenarioHeadingText}" FontSize="24" FontWeight="Bold" Margin="0,0,0,8"/>
+            <TextBlock Text="Сценарии не сохраняются в базы энциклопедии. Seed позволяет воспроизвести результат." Style="{StaticResource ScenarioLeadText}" Margin="0,0,0,12"/>
+            <WrapPanel Margin="0,0,0,8">
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Жанр" Style="{StaticResource ScenarioMetaText}"/><ComboBox x:Name="GenreBox" Width="180" SelectionChanged="GenreBox_SelectionChanged"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Участники" Style="{StaticResource ScenarioMetaText}"/><ComboBox x:Name="ParticipantsBox" Width="120"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Длительность, мин." Style="{StaticResource ScenarioMetaText}"/><ComboBox x:Name="DurationBox" Width="140"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Тон" Style="{StaticResource ScenarioMetaText}"/><ComboBox x:Name="ToneBox" Width="150"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Сложность" Style="{StaticResource ScenarioMetaText}"/><ComboBox x:Name="DifficultyBox" Width="150"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Seed" Style="{StaticResource ScenarioMetaText}"/><TextBox x:Name="SeedBox" Width="120"/></StackPanel>
+            </WrapPanel>
+            <WrapPanel Margin="0,0,0,14">
+                <Button x:Name="GenerateButton" Content="Сгенерировать" Style="{StaticResource ScenarioPrimaryButton}" Click="Generate_Click" Margin="0,0,8,0"/>
+                <Button Content="Повторить по seed" Style="{StaticResource ScenarioActionButton}" Click="Replay_Click"/>
+                <Button Content="Копировать сценарий" Style="{StaticResource ScenarioActionButton}" Click="CopyScenario_Click" Margin="8,0,0,0"/>
+                <Button Content="Экспорт JSON" Style="{StaticResource ScenarioActionButton}" Click="ExportScenario_Click" Margin="8,0,0,0"/>
+                <Button Content="Открыть JSON" Style="{StaticResource ScenarioActionButton}" Click="ImportScenario_Click" Margin="8,0,0,0"/>
+            </WrapPanel>
+            <Separator Margin="0,0,0,10"/>
+            <TextBlock Text="Канонические кандидаты из Knowledge DB" Style="{StaticResource ScenarioHeadingText}" Margin="0,0,0,4"/>
+            <TextBlock Text="Поиск ничего не меняет в сценарии и использует базу только для чтения. Категория ищется по точному названию." Style="{StaticResource ScenarioLeadText}" Margin="0,0,0,8"/>
+            <WrapPanel Margin="0,0,0,8">
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Тип сущности"/><ComboBox x:Name="KnowledgeTypeBox" Width="160"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Категория"/><TextBox x:Name="KnowledgeCategoryBox" Width="210"/></StackPanel>
+                <StackPanel Margin="0,0,12,8"><TextBlock Text="Название"/><TextBox x:Name="KnowledgeTitleBox" Width="210"/></StackPanel>
+                <CheckBox x:Name="IncludeNeedsReviewBox" Content="Включить требующие проверки" VerticalAlignment="Bottom" Margin="0,0,12,16"/>
+                <Button Content="Найти кандидатов" Style="{StaticResource ScenarioActionButton}" Click="SearchKnowledge_Click" Margin="0,0,8,8" VerticalAlignment="Bottom"/>
+                <Button Content="Подобрать для каркаса" Style="{StaticResource ScenarioActionButton}" Click="SelectCanonicalAnchors_Click" Margin="0,0,8,8" VerticalAlignment="Bottom"/>
+                <Button Content="Предложить по seed" Style="{StaticResource ScenarioActionButton}" Click="SuggestCanonicalAnchors_Click" Margin="0,0,8,8" VerticalAlignment="Bottom"/>
+                <Button Content="Применить выбранные опоры" Style="{StaticResource ScenarioActionButton}" Click="ApplyCanonicalAnchors_Click" Margin="0,0,0,8" VerticalAlignment="Bottom"/>
+            </WrapPanel>
+            <TextBox x:Name="KnowledgeStatusText" Style="{StaticResource ScenarioStatusText}"/>
+            <StackPanel x:Name="KnowledgeResultsPanel" Margin="0,0,0,12"/>
+            <TextBox x:Name="ScenarioStatusText" Style="{StaticResource ScenarioStatusText}"/>
+            <StackPanel x:Name="ResultPanel"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
