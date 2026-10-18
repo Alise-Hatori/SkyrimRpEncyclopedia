@@ -70,11 +70,3 @@ Skyrim and The Elder Scrolls and related marks belong to their respective owners
 This is an independent fan project, not an officially endorsed product. Online map
 providers, Discord, Fandom and Microsoft do not endorse this application merely
 because their services or components are used.
-
-## Public release gate
-
-Keep the repository and candidate private until content permissions, attribution,
-dependency notices and clean-machine/visual acceptance are completed. Private
-storage is not a legal conclusion about redistribution. Do not publish disputed
-materials as public source files or public release assets. A private draft is not
-a public release or a statement that these blockers are closed.
