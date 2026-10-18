@@ -63,8 +63,7 @@ generation/source terms, ownership and permitted redistribution for each group.
 Replace, obtain permission for or omit disputed resources before public release.
 
 The original code, scenario texts and event templates have no agreed public license
-in this repository. No LICENSE is supplied because none has been authorized. Do
-not assume that a private repository is an open-source grant.
+in this repository. No LICENSE is supplied because none has been authorized.
 
 Skyrim and The Elder Scrolls and related marks belong to their respective owners.
 This is an independent fan project, not an officially endorsed product. Online map
