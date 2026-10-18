@@ -48,6 +48,26 @@ application author for this candidate. They are community materials, **not Skyri
 Wiki canon**. Original article IDs, texts and necessary metadata were retained;
 one internal link was preserved and a local official-database link excluded.
 
+## Authorship and Acknowledgments
+
+- **Author of the Skyrim RP Encyclopedia:** [Alise-Hatori](https://github.com/Alise-Hatori) — responsible for application and tool development, as well as the organization of project materials.
+- **SkyRP Map:** [Open Map](https://skyrpmap.com/) · [Creator Community on Discord](https://discord.gg/DQ6YqDTb4).
+- **RP Rules and Community Materials:** [NirnTales](https://nirntales.com/) — the source for the roleplay ruleset, presented here as a collection of 33 articles.
+
+The Skyrim RP Encyclopedia is an independent fan project and is not affiliated with the official developers or rights holders of *The Elder Scrolls*. This project is neither endorsed nor sponsored by Bethesda, ZeniMax, Microsoft, Fandom, or any providers of mapping services.
+
+## License and Rights
+
+The original code for the Skyrim RP Encyclopedia is distributed under the Alise-Hatori Non-Commercial License (version 1.0). This license permits the free use, study, modification, and distribution of the code, subject to the terms therein. Commercial use requires prior written consent from the rights holder.
+
+RP materials, maps, images, encyclopedic texts, and third-party libraries are governed by their own respective licenses, permissions, and terms set by their respective rights holders. The license covering the original code does not automatically extend to these materials.
+
+For more details, please refer to:
+- [LICENSE](LICENSE)
+- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+- [CONTENT_ATTRIBUTION.md](CONTENT_ATTRIBUTION.md)
+
+
 Approval to include the selected articles is not proof of ownership of any
 third-party passages. One article, "Положение Талморского Посольства", includes
 Discord message/channel references. These links do not themselves prove borrowing,
